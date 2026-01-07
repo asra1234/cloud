@@ -1,6 +1,10 @@
 const db = require("./db");
 
 exports.create = (data) => {
+  if (data == null || data.category_id == null) {
+    return Promise.reject(new Error("category_id is required"));
+  }
+
   return db.query(
     `INSERT INTO products 
     (name, slug, category_id, brand_id, price, description, is_active, is_featured, in_stock, on_sale)

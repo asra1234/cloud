@@ -10,6 +10,9 @@ exports.createProduct = async (req, res) => {
     res.json({ message: "Product created" });
   } catch (err) {
     console.error(err);
+    if (err && err.message && err.message.includes("category_id")) {
+      return res.status(400).json({ error: err.message });
+    }
     res.status(500).json({ error: err.message || "Internal server error" });
   }
 };
