@@ -1,15 +1,7 @@
-exports.sendNotification = async (req, res) => {
-  const { type, message, userId } = req.body;
+exports.sendNotification = (req, res) => {
+  const { order_id, message } = req.body;
 
-  // Simulate notification
-  console.log("🔔 NOTIFICATION EVENT");
-  console.log("Type:", type);
-  console.log("User ID:", userId);
-  console.log("Message:", message);
+  console.log(`Notification sent for order ${order_id}: ${message}`);
 
-  res.json({
-    status: "Notification sent (simulated)",
-    type,
-    userId
-  });
+  res.json({ message: "Notification sent" });
 };

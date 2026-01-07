@@ -1,14 +1,11 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 
 const app = express();
-
-app.use(cors());
 app.use(express.json());
 
-app.use("/api/notifications", require("./routes/notificationRoutes"));
+app.post("/api/notifications", require("./controllers/notificationController").sendNotification);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Notification Service running on port ${process.env.PORT}`);
+  console.log("Notification Service running on port " + process.env.PORT);
 });
