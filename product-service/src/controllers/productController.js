@@ -1,8 +1,17 @@
 const Product = require("../models/productModel");
 
 exports.createProduct = async (req, res) => {
-  await Product.create(req.body);
-  res.json({ message: "Product created" });
+  try {
+    if (req.body == null || req.body.category_id == null) {
+      return res.status(400).json({ error: "category_id is required" });
+    }
+
+    await Product.create(req.body);
+    res.json({ message: "Product created" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message || "Internal server error" });
+  }
 };
 
 exports.getProducts = async (req, res) => {
